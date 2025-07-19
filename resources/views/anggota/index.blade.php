@@ -45,12 +45,12 @@
 
                                         deleteForms.forEach(form => {
                                             form.addEventListener('submit', function(e) {
-                                                e.preventDefault(); // Cegah submit langsung
+                                                e.preventDefault();
 
                                                 alertify.confirm('Konfirmasi Hapus', 'Yakin ingin menghapus data ini?',
                                                     function() {
                                                         form.submit();
-                                                        alertify.success('Data Berhasil dihapus'); // Lanjutkan submit jika klik OK
+                                                        alertify.success('Data Berhasil dihapus');
                                                     },
                                                     function() {
                                                         alertify.error('Dibatalkan');

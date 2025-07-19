@@ -86,8 +86,6 @@
         </div>
     </div>
 
-    {{-- Script untuk konfirmasi hapus (diletakkan di luar loop) --}}
-    {{-- Pastikan Anda sudah menyertakan library AlertifyJS di layout utama --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const deleteForms = document.querySelectorAll('.form-delete');

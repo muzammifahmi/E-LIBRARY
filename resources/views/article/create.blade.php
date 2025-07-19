@@ -1,5 +1,4 @@
 <x-app-layout>
-    {{-- Import langsung Trix CSS & JS --}}
     <link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
