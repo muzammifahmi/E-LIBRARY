@@ -1,7 +1,7 @@
 <x-guest-layout>
             <div class="flex flex-col items-center mb-6">
-                <h2 class="text-2xl font-bold text-blue-700 mb-2">PIQ Library</h2>
-                <p class="text-gray-600 text-center">Silakan login untuk mengakses dashboard perpustakaan pesantren.</p>
+                <h2 class="text-2xl font-bold text-blue-700 mb-2">E-Library</h2>
+                <p class="text-gray-600 text-center">Silakan login untuk mengakses dashboard perpustakaan.</p>
             </div>
 
             <!-- Session Status -->

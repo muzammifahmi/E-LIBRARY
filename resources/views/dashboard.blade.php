@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-3">
             <h2 class="font-bold text-2xl text-blue-700 leading-tight">
-                {{ __('PIQ Library') }}
+                {{ __('E-Library') }}
             </h2>
         </div>
     </x-slot>
@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-lg rounded-lg p-8">
                 <h3 class="text-xl font-semibold text-blue-800 mb-4">Selamat Datang, {{ Auth::user()->name }}!</h3>
-                <p class="text-gray-700 mb-8">Anda berhasil login ke dashboard PIQ Library. Berikut fitur yang tersedia:</p>
+                <p class="text-gray-700 mb-8">Anda berhasil login ke dashboard E-Library. Berikut fitur yang tersedia:</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white border border-gray-200 rounded-lg shadow p-6 flex flex-col items-center">
                         <svg class="w-8 h-8 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

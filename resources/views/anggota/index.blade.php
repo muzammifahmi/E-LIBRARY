@@ -6,71 +6,87 @@
             </h2>
         </div>
     </x-slot>
+
     <div class="py-12 bg-gradient-to-b from-green-100 to-white min-h-screen font-sans">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/80 shadow-xl rounded-2xl p-10">
-                <div class="flex justify-between items-center mb-10">
+                <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-extrabold text-green-700 tracking-tight">Daftar Anggota</h2>
                     <a href="{{ route('anggota.create') }}"
                         class="px-7 py-2 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-full font-semibold shadow-md hover:from-green-600 hover:to-green-800 transition text-base">
                         + Tambah Anggota
                     </a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @forelse ($anggotas as $a)
-                        <div
-                            class="bg-white border border-green-200 rounded-2xl shadow-lg p-8 flex flex-col items-center hover:shadow-2xl transition">
-                            <img src="{{ asset('storage/' . $a->image) }}" alt="{{ $a->name }}"
-                                class="w-28 h-28 rounded-full object-cover mb-5 border-4 border-green-300 shadow">
-                            <h5 class="font-bold text-xl text-green-800 mb-2">{{ $a->name }}</h5>
-                            <p class="text-gray-600 mb-1">Tahun Masuk: <span
-                                    class="font-semibold">{{ $a->year_joined }}</span></p>
-                            <p class="text-grayname: -600 mb-5">Jabatan: <span
-                                    class="font-semibold">{{ ucfirst($a->position) }}</span></p>
-                            <div class="flex gap-3">
-                                <a href="{{ route('anggota.edit', $a->id) }}"
-                                    class="px-5 py-2 bg-yellow-400 text-white rounded-full font-semibold shadow hover:bg-yellow-500 transition text-sm">Edit</a>
-                                <form action="{{ route('anggota.destroy', $a->id) }}" method="POST"
-                                    class="form-delete">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="px-5 py-2 bg-red-600 text-white rounded-full font-semibold shadow hover:bg-red-700 transition text-sm">
-                                        Hapus
-                                    </button>
-                                </form>
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        const deleteForms = document.querySelectorAll('.form-delete');
 
-                                        deleteForms.forEach(form => {
-                                            form.addEventListener('submit', function(e) {
-                                                e.preventDefault();
+                @if($anggotas->isEmpty())
+                    <div class="text-center text-gray-400 py-16 text-lg">
+                        Tidak ada anggota.
+                    </div>
+                @else
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                            <thead class="bg-green-200 text-green-900 font-semibold">
+                                <tr>
+                                    <th class="py-3 px-4 border-b text-left">Foto</th>
+                                    <th class="py-3 px-4 border-b text-left">Nama</th>
+                                    <th class="py-3 px-4 border-b text-left">Tahun Masuk</th>
+                                    <th class="py-3 px-4 border-b text-left">Jabatan</th>
+                                    <th class="py-3 px-4 border-b text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($anggotas as $a)
+                                    <tr class="hover:bg-green-50 transition">
+                                        <td class="py-3 px-4 border-b">
+                                            <img src="{{ asset('storage/' . $a->image) }}" alt="{{ $a->name }}"
+                                                class="w-14 h-14 rounded-full object-cover border-2 border-green-400">
+                                        </td>
+                                        <td class="py-3 px-4 border-b">{{ $a->name }}</td>
+                                        <td class="py-3 px-4 border-b">{{ $a->year_joined }}</td>
+                                        <td class="py-3 px-4 border-b">{{ ucfirst($a->position) }}</td>
+                                        <td class="py-3 px-4 border-b text-center">
+                                            <div class="flex justify-center gap-2">
+                                                <a href="{{ route('anggota.edit', $a->id) }}"
+                                                    class="px-4 py-1 bg-yellow-400 text-white rounded-full text-sm font-semibold hover:bg-yellow-500 transition">Edit</a>
 
-                                                alertify.confirm('Konfirmasi Hapus', 'Yakin ingin menghapus data ini?',
-                                                    function() {
-                                                        form.submit();
-                                                        alertify.success('Data Berhasil dihapus');
-                                                    },
-                                                    function() {
-                                                        alertify.error('Dibatalkan');
-                                                    });
-                                            });
-                                        });
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="col-span-3 text-center text-gray-400 py-16 text-lg">
-                            Tidak ada anggota.
-                        </div>
-                    @endforelse
-                </div>
+                                                <form action="{{ route('anggota.destroy', $a->id) }}" method="POST" class="form-delete">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="px-4 py-1 bg-red-600 text-white rounded-full text-sm font-semibold hover:bg-red-700 transition">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteForms = document.querySelectorAll('.form-delete');
 
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
+                    alertify.confirm('Konfirmasi Hapus', 'Yakin ingin menghapus data ini?',
+                        function () {
+                            form.submit();
+                            alertify.success('Data Berhasil dihapus');
+                        },
+                        function () {
+                            alertify.error('Dibatalkan');
+                        });
+                });
+            });
+        });
+    </script>
 </x-app-layout>

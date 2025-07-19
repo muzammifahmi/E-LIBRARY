@@ -25,63 +25,60 @@
                 </div>
 
                 {{-- Responsive Grid Layout --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @forelse ($articles as $article)
-                        <div
-                            class="bg-white border border-green-200 rounded-2xl shadow-lg p-6 flex flex-col hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-
-                            {{-- Gambar Artikel --}}
-                            @if($article->image)
-                                <img src="{{ asset('storage/articles/' . $article->image) }}" alt="{{ $article->title }}"
-                                    class="w-full h-48 object-cover mb-5 rounded-lg shadow">
-                            @else
-                                <div class="w-full h-48 flex items-center justify-center bg-gray-100 mb-5 rounded-lg text-gray-400">
-                                    Tidak ada gambar
-                                </div>
-                            @endif
-
-                            {{-- Konten Teks --}}
-                            <div class="flex-grow">
-                                <h5 class="font-bold text-xl text-green-800 mb-2">{{ $article->title }}</h5>
-                                <p class="text-gray-600 mb-4">Kategori: <span
-                                        class="font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-md text-sm">{{ $article->category->name ?? '-' }}</span>
-                                </p>
-                            </div>
-
-                            {{-- Tombol Aksi --}}
-                            <div class="flex gap-3 mt-auto">
-                                <a href="{{ route('article.show', $article->id) }}"
-                                    class="w-full text-center px-4 py-2 bg-blue-500 text-white rounded-lg font-semibold shadow hover:bg-blue-600 transition text-sm">
-                                    Baca
-                                </a>
-                                <a href="{{ route('article.edit', $article->id) }}"
-                                    class="w-full text-center px-4 py-2 bg-yellow-400 text-white rounded-lg font-semibold shadow hover:bg-yellow-500 transition text-sm">Edit</a>
-
-                                <form action="{{ route('article.destroy', $article->id) }}" method="POST"
-                                    class="w-full form-delete">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="w-full text-center px-4 py-2 bg-red-600 text-white rounded-lg font-semibold shadow hover:bg-red-700 transition text-sm">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </div>
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-green-200 shadow rounded-xl overflow-hidden">
+        <thead class="bg-green-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-sm font-bold text-green-800 uppercase tracking-wider">No</th>
+                <th class="px-6 py-3 text-left text-sm font-bold text-green-800 uppercase tracking-wider">Gambar</th>
+                <th class="px-6 py-3 text-left text-sm font-bold text-green-800 uppercase tracking-wider">Judul</th>
+                <th class="px-6 py-3 text-left text-sm font-bold text-green-800 uppercase tracking-wider">Kategori</th>
+                <th class="px-6 py-3 text-center text-sm font-bold text-green-800 uppercase tracking-wider">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-green-100">
+            @forelse ($articles as $index => $article)
+                <tr class="hover:bg-green-50 transition">
+                    <td class="px-6 py-4 text-sm text-gray-800">{{ $index + 1 }}</td>
+                    <td class="px-6 py-4">
+                        @if($article->image)
+                            <img src="{{ asset('storage/articles/' . $article->image) }}" alt="{{ $article->title }}" class="w-16 h-16 rounded object-cover">
+                        @else
+                            <span class="text-gray-400 italic">Tidak ada</span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4 text-sm font-semibold text-green-800">{{ $article->title }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700">
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-md text-xs">
+                            {{ $article->category->name ?? '-' }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <a href="{{ route('article.show', $article->id) }}"
+                                class="px-3 py-1 bg-blue-500 text-white rounded shadow hover:bg-blue-600 text-xs">Baca</a>
+                            <a href="{{ route('article.edit', $article->id) }}"
+                                class="px-3 py-1 bg-yellow-400 text-white rounded shadow hover:bg-yellow-500 text-xs">Edit</a>
+                            <form action="{{ route('article.destroy', $article->id) }}" method="POST" class="form-delete">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-600 text-white rounded shadow hover:bg-red-700 text-xs">Hapus</button>
+                            </form>
                         </div>
-                    @empty
-                        {{-- Tampilan jika tidak ada artikel --}}
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-400 py-16 text-lg">
-                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" aria-hidden="true">
-                                <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada artikel</h3>
-                            <p class="mt-1 text-sm text-gray-500">Mulai dengan menambahkan artikel baru.</p>
-                        </div>
-                    @endforelse
-                </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center text-gray-500 py-10">
+                        Tidak ada artikel. <br><span class="text-sm text-gray-400">Tambahkan artikel baru untuk mulai.</span>
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
             </div>
         </div>
     </div>
