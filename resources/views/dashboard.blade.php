@@ -19,7 +19,7 @@
                         </svg>
                         <h4 class="font-semibold mb-2">Artikel</h4>
                         <p class="text-gray-600 text-center text-sm">Kelola dan baca artikel seputar perpustakaan dan literasi.</p>
-                        <a href="{{ route('artikel') }}" class="mt-3 px-4 py-2 bg-white text-blue-700 border border-blue-700 rounded-full font-semibold shadow hover:bg-blue-700 hover:text-white transition text-sm">Lihat Artikel</a>
+                        <a href="{{ route('article.index') }}" class="mt-3 px-4 py-2 bg-white text-blue-700 border border-blue-700 rounded-full font-semibold shadow hover:bg-blue-700 hover:text-white transition text-sm">Lihat Artikel</a>
                     </div>
                     <div class="bg-white border border-gray-200 rounded-lg shadow p-6 flex flex-col items-center">
                         <svg class="w-8 h-8 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

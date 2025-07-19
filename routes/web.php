@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -16,12 +18,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/artikel', function () {
-    return view('artikel.index');
-})->middleware(['auth', 'verified'])->name('artikel');
+
 
 Route::resource('anggota', AnggotaController::class)->parameters([
     'anggota' => 'anggota'
 ]);
+
+Route::resource('article', ArticleController::class)->parameters([
+    'article' => 'article'
+]);
+
+Route::resource('categories', CategoryController::class);
 
 require __DIR__.'/auth.php';
