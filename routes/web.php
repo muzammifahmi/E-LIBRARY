@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BukuController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
@@ -29,5 +30,9 @@ Route::resource('article', ArticleController::class)->parameters([
 ]);
 
 Route::resource('categories', CategoryController::class);
+
+Route::resource('buku', BukuController::class)->parameters([
+    'buku' => 'buku'
+]);
 
 require __DIR__.'/auth.php';

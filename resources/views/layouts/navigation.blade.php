@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')">
                         {{ __('Data Anggota') }}
                     </x-nav-link>
-                    <x-nav-link href="#" :active="false">
+                    <x-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')">
                         {{ __('Data Buku') }}
                     </x-nav-link>
                     <x-nav-link href="#" :active="false">

@@ -34,52 +34,53 @@
 <body class="bg-white text-gray-900 flex flex-col min-h-screen font-sans">
 
     {{-- Header Navigation --}}
-<header class="w-full fixed top-0 left-0 z-50 bg-white shadow transition-shadow">
-    <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-        <div class="flex items-center gap-3 overflow-hidden">
-            <a href="/" class="flex items-center">
-                <img src="images/LOGO.png" alt="Logo PIQ" class="w-16 h-16 object-contain drop-shadow -my-2">
-            </a>
-            <span class="text-2xl font-extrabold text-blue-700 tracking-tight">E-Library</span>
-        </div>
-        @if (Route::has('login'))
-            <nav class="space-x-2">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition font-semibold">
-                        Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
-                        Log in
-                    </a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
-                            Register
+    <header class="w-full fixed top-0 left-0 z-50 bg-white shadow transition-shadow">
+        <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+            <div class="flex items-center gap-3 overflow-hidden">
+                <a href="/" class="flex items-center">
+                    <img src="images/LOGO.png" alt="Logo PIQ" class="w-16 h-16 object-contain drop-shadow -my-2">
+                </a>
+                <span class="text-2xl font-extrabold text-blue-700 tracking-tight">E-Library</span>
+            </div>
+            @if (Route::has('login'))
+                <nav class="space-x-2">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition font-semibold">
+                            Dashboard
                         </a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
-    </div>
-</header>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
+                            Log in
+                        </a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
+        </div>
+    </header>
 
 
     {{-- Hero Section --}}
     <section class="bg-gradient-to-b from-blue-50 to-white pt-36 pb-20 px-6">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-            {{-- Tulisan Arab --}}
-            <div class="lg:col-span-2 text-center lg:text-left flex flex-col justify-center">
-                <h1 class="text-5xl font-extrabold text-blue-800 leading-tight mb-6 drop-shadow">
-                    E-Library
-                </h1>
-                <p class="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 mb-8">
-                    Platform perpustakaan digital modern untuk pesantren, dengan fitur lengkap, akses mudah, dan
-                    tampilan profesional.
-                </p>
-            </div>
+<div class="lg:col-span-2 text-center flex flex-col justify-center items-center">
+    <img src="images/LOGO.png" alt="Logo PIQ" class="w-32 h-32 object-contain drop-shadow mb-4">
+    <h1 class="text-5xl font-extrabold text-blue-800 leading-tight mb-6 drop-shadow">
+        E-Library
+    </h1>
+    <p class="text-lg text-gray-600 max-w-xl text-center mb-8">
+        Platform perpustakaan digital modern untuk pesantren, dengan fitur lengkap, akses mudah, dan
+        tampilan profesional.
+    </p>
+</div>
+
             {{-- Artikel Terbaru --}}
             <div
                 class="bg-white border border-blue-100 rounded-2xl shadow-lg p-8 max-h-[500px] overflow-y-auto hide-scrollbar">
@@ -148,7 +149,7 @@
                     class="bg-white border border-blue-100 rounded-2xl shadow-lg p-8 flex flex-col items-center hover:shadow-2xl transition">
                     <img src="{{ asset('storage/' . $a->image) }}" alt="{{ $a->name }}"
                         class="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-200 shadow">
-                    <h3 class="text-xl font-bold text-blue-800 mb-1">{{ $a->name }}</h3>
+                    <h3 class="text-xl font-bold text-blue-800 mb-1 text-center">{{ $a->name }}</h3>
                     <p class="text-gray-600 mb-1">Tahun Masuk: <span class="font-semibold">{{ $a->year_joined }}</span>
                     </p>
                     <p class="text-gray-600">Jabatan: <span class="font-semibold">{{ ucfirst($a->position) }}</span>
@@ -161,10 +162,12 @@
             @endforelse
         </div>
     </section>
+                        @include('components.contact')
 
     {{-- Footer --}}
     <footer class="w-full bg-blue-50 text-center py-6 mt-auto border-t border-blue-100">
-        <p class="text-gray-600 text-sm">&copy; {{ date('Y') }} <span class="font-bold text-blue-700">E-Library</span>. All rights reserved.</p>
+        <p class="text-gray-600 text-sm">&copy; {{ date('Y') }} <span
+                class="font-bold text-blue-700">E-Library</span>. All rights reserved.</p>
     </footer>
 </body>
 
