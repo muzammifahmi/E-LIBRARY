@@ -42,27 +42,17 @@
                 </a>
                 <span class="text-2xl font-extrabold text-blue-700 tracking-tight">E-Library</span>
             </div>
-            @if (Route::has('login'))
-                <nav class="space-x-2">
-                    @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition font-semibold">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
-                            Log in
-                        </a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
+            <nav class="space-x-2">
+
+                <a href="{{ route('login') }}"
+                    class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
+                    Log in
+                </a>
+                <a href="{{ route('register') }}"
+                    class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-600 rounded shadow hover:bg-blue-600 hover:text-white transition font-semibold">
+                    Register
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -70,16 +60,16 @@
     {{-- Hero Section --}}
     <section class="bg-gradient-to-b from-blue-50 to-white pt-36 pb-20 px-6">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-<div class="lg:col-span-2 text-center flex flex-col justify-center items-center">
-    <img src="images/LOGO.png" alt="Logo PIQ" class="w-32 h-32 object-contain drop-shadow mb-4">
-    <h1 class="text-5xl font-extrabold text-blue-800 leading-tight mb-6 drop-shadow">
-        E-Library
-    </h1>
-    <p class="text-lg text-gray-600 max-w-xl text-center mb-8">
-        Platform perpustakaan digital modern untuk pesantren, dengan fitur lengkap, akses mudah, dan
-        tampilan profesional.
-    </p>
-</div>
+            <div class="lg:col-span-2 text-center flex flex-col justify-center items-center">
+                <img src="images/LOGO.png" alt="Logo PIQ" class="w-32 h-32 object-contain drop-shadow mb-4">
+                <h1 class="text-5xl font-extrabold text-blue-800 leading-tight mb-6 drop-shadow">
+                    E-Library
+                </h1>
+                <p class="text-lg text-gray-600 max-w-xl text-center mb-8">
+                    Platform perpustakaan digital modern untuk pesantren, dengan fitur lengkap, akses mudah, dan
+                    tampilan profesional.
+                </p>
+            </div>
 
             {{-- Artikel Terbaru --}}
             <div
@@ -162,7 +152,7 @@
             @endforelse
         </div>
     </section>
-                        @include('components.contact')
+    @include('components.contact')
 
     {{-- Footer --}}
     <footer class="w-full bg-blue-50 text-center py-6 mt-auto border-t border-blue-100">

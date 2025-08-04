@@ -11,11 +11,23 @@ class BukuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bukus = Buku::all();
-        return view('buku.index', compact('bukus'));
+    $query = Buku::query();
+
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+
+        $query->where(function($q) use ($search) {
+            $q->where('judul', 'like', '%' . $search . '%')
+              ->orWhere('penulis', 'like', '%' . $search . '%')
+              ->orWhere('penerbit', 'like', '%' . $search . '%');
+        });
     }
+
+    $bukus = $query->latest()->get();
+
+    return view('buku.index', compact('bukus'));    }
 
     /**
      * Show the form for creating a new resource.

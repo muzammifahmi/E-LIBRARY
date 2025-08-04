@@ -12,18 +12,29 @@
             <div class="bg-white/80 shadow-xl rounded-2xl p-10">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-extrabold text-green-700 tracking-tight">Daftar Buku</h2>
+                    <form action="{{ route('buku.index') }}" method="GET" class="flex items-center gap-2">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari judul / penulis / penerbit"
+                            class="px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-sm w-64">
+                        <button type="submit"
+                            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition text-sm">
+                            Cari
+                        </button>
+                    </form>
                     <a href="{{ route('buku.create') }}"
-                        class="px-7 py-2 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-full font-semibold shadow-md hover:from-green-600 hover:to-green-800 transition text-base">
+                        class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-full font-semibold shadow-md hover:from-green-600 hover:to-green-800 transition text-base">
                         + Tambah Buku
                     </a>
+
                 </div>
 
-                @if($bukus->isEmpty())
+                @if ($bukus->isEmpty())
                     <div class="text-center text-gray-400 py-16 text-lg">
                         Tidak ada data buku.
                     </div>
                 @else
                     <div class="overflow-x-auto">
+
                         <table class="min-w-full bg-white border border-gray-200 rounded-lg">
                             <thead class="bg-green-200 text-green-900 font-semibold">
                                 <tr>
@@ -39,8 +50,9 @@
                                 @foreach ($bukus as $buku)
                                     <tr class="hover:bg-green-50 transition">
                                         <td class="py-3 px-4 border-b">
-                                            @if($buku->foto)
-                                                <img src="{{ asset('storage/' . $buku->foto) }}" alt="{{ $buku->judul }}"
+                                            @if ($buku->foto)
+                                                <img src="{{ asset('storage/' . $buku->foto) }}"
+                                                    alt="{{ $buku->judul }}"
                                                     class="w-14 h-14 rounded object-cover border-2 border-green-400">
                                             @else
                                                 <img src="https://via.placeholder.com/100"
@@ -55,8 +67,11 @@
                                             <div class="flex justify-center gap-2">
                                                 <a href="{{ route('buku.edit', $buku->id) }}"
                                                     class="px-4 py-1 bg-yellow-400 text-white rounded-full text-sm font-semibold hover:bg-yellow-500 transition">Edit</a>
+                                                <a href="{{ route('buku.show', $buku->id) }}"
+                                                    class="px-4 py-1 bg-green-400 text-white rounded-full text-sm font-semibold hover:bg-green-500 transition">lihat</a>
 
-                                                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" class="form-delete">
+                                                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST"
+                                                    class="form-delete">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
@@ -77,19 +92,19 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const deleteForms = document.querySelectorAll('.form-delete');
 
             deleteForms.forEach(form => {
-                form.addEventListener('submit', function (e) {
+                form.addEventListener('submit', function(e) {
                     e.preventDefault();
 
                     alertify.confirm('Konfirmasi Hapus', 'Yakin ingin menghapus data buku ini?',
-                        function () {
+                        function() {
                             form.submit();
                             alertify.success('Data buku berhasil dihapus');
                         },
-                        function () {
+                        function() {
                             alertify.error('Dibatalkan');
                         });
                 });

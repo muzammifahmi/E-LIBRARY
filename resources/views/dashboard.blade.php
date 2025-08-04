@@ -35,7 +35,7 @@
                         </svg>
                         <h4 class="font-semibold mb-2">Data Buku</h4>
                         <p class="text-gray-600 text-center text-sm">Kelola data buku, tambah, edit, dan cari koleksi.</p>
-                        <a href="#" class="mt-3 px-4 py-2 bg-white text-blue-700 border border-blue-700 rounded-full font-semibold shadow hover:bg-blue-700 hover:text-white transition text-sm">Lihat Buku</a>
+                        <a href="{{route('buku.index')}}" class="mt-3 px-4 py-2 bg-white text-blue-700 border border-blue-700 rounded-full font-semibold shadow hover:bg-blue-700 hover:text-white transition text-sm">Lihat Buku</a>
                     </div>
                     <div class="bg-white border border-gray-200 rounded-lg shadow p-6 flex flex-col items-center">
                         <svg class="w-8 h-8 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
