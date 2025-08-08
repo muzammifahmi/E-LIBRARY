@@ -84,27 +84,21 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const deleteForms = document.querySelectorAll('.form-delete');
 
             deleteForms.forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault(); // Mencegah form untuk submit secara langsung
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-                    alertify.confirm('Konfirmasi Hapus',
-                        'Apakah Anda yakin ingin menghapus artikel ini?',
-                        function() {
-                            // Jika pengguna klik 'OK', submit form
+                    alertify.confirm('Konfirmasi Hapus', 'Yakin ingin menghapus data ini?',
+                        function () {
                             form.submit();
+                            alertify.success('Data Berhasil dihapus');
                         },
-                        function() {
-                            // Jika pengguna klik 'Cancel'
-                            alertify.error('Hapus dibatalkan');
-                        }
-                    ).set('labels', {
-                        ok: 'Ya, Hapus!',
-                        cancel: 'Batal'
-                    });
+                        function () {
+                            alertify.error('Dibatalkan');
+                        });
                 });
             });
         });

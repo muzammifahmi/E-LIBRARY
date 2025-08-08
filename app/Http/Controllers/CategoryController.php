@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
-{   
+{
     public function index()
     {
         $categories = Category::latest()->paginate(10);
@@ -52,5 +52,11 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')
             ->with('success', 'Kategori berhasil dihapus.');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 }

@@ -13,7 +13,8 @@
             <div class="bg-white/80 shadow-xl rounded-2xl p-10">
 
                 {{-- Form Edit --}}
-                <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
+                <form id="form-edit-article" action="{{ route('article.update', $article->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="space-y-6">
@@ -36,7 +37,8 @@
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id', $article->category_id) == $category->id ? 'selected' : '' }}>
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id', $article->category_id) == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -54,7 +56,8 @@
                             @if ($article->image)
                                 <div class="mt-2">
                                     <p class="text-sm text-gray-600">Gambar saat ini:</p>
-                                    <img src="{{ asset('storage/articles/' . $article->image) }}" alt="Artikel Image" class="w-40 rounded mt-2">
+                                    <img src="{{ asset('storage/articles/' . $article->image) }}" alt="Artikel Image"
+                                        class="w-40 rounded mt-2">
                                 </div>
                             @endif
                             @error('image')
@@ -66,7 +69,8 @@
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700">Isi Artikel</label>
                             <div wire:ignore>
-                                <input id="content" type="hidden" name="content" value="{{ old('content', $article->content) }}">
+                                <input id="content" type="hidden" name="content"
+                                    value="{{ old('content', $article->content) }}">
                                 <trix-editor input="content"
                                     class="mt-1 block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
                                 </trix-editor>
@@ -91,8 +95,29 @@
                     </div>
 
                 </form>
-
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-edit-article');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alertify.confirm('Konfirmasi', 'Yakin ingin mengupdate artikel ini?',
+                        function() {
+                            alertify.success('Artikel berhasil diperbarui');
+                            setTimeout(function() {
+                                form.submit();
+                            }, 1200); 
+                        },
+                        function() {
+                            alertify.error('Update dibatalkan');
+                        });
+                });
+            }
+        });
+    </script>
 </x-app-layout>

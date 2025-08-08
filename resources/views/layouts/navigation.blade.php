@@ -106,10 +106,10 @@
             <x-responsive-nav-link :href="route('article.index')" :active="request()->routeIs('article.*')">
                 {{ __('Artikel') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="#">
+            <x-responsive-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')">
                 {{ __('Data Anggota') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="#">
+            <x-responsive-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')">
                 {{ __('Data Buku') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="#">
