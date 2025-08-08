@@ -17,7 +17,7 @@
                     {!! nl2br($article->content) !!}
                 </div>
                 <p class="text-gray-600 mb-4">Kategori: <span
-                        class="font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-md text-sm">{{ $article->category->name ?? '-' }}</span>
+                        class="font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-md text-sm">{{ optional($article->category)->name ?? '-' }}</span>
                 </p>
                 <a href="{{ route('article.index') }}"
                     class="inline-block mt-8 px-6 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition">Kembali

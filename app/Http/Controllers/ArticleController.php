@@ -77,8 +77,12 @@ class ArticleController extends Controller
         $article->delete();
         return redirect()->route('article.index')->with('success', 'Artikel berhasil dihapus.');
     }
-    public function show(Article $article)
+    public function show($id)
     {
+        $article = Article::find($id);
+        if (!$article) {
+            abort(404); // Atau redirect dengan pesan error
+        }
         return view('article.show', compact('article'));
     }
 }

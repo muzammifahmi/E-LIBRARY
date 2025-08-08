@@ -14,4 +14,9 @@ class HomeController extends Controller
         $articles = Article::latest()->take(5)->get(); // Ambil 5 artikel terbaru, bisa disesuaikan
         return view('welcome', compact('anggotas', 'articles'));
     }
+    public function show($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('home.show_home', compact('article'));
+    }
 }

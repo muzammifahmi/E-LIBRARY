@@ -5,9 +5,10 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,6 +29,8 @@ Route::resource('anggota', AnggotaController::class)->parameters([
 Route::resource('article', ArticleController::class)->parameters([
     'article' => 'article'
 ]);
+
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
 
 Route::resource('categories', CategoryController::class);
 
