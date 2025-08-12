@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TulisanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -19,23 +20,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-
 Route::resource('anggota', AnggotaController::class)->parameters([
     'anggota' => 'anggota'
 ]);
-
 Route::resource('article', ArticleController::class)->parameters([
     'article' => 'article'
 ]);
-
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
-
 Route::resource('categories', CategoryController::class);
-
 Route::resource('buku', BukuController::class)->parameters([
     'buku' => 'buku'
 ]);
 
+Route::get('profil', function(){
+    return view('profil');
+})->name('profil');
 require __DIR__.'/auth.php';
